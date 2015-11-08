@@ -5,11 +5,12 @@ const Item = React.createClass({
         return{
             name: null,
             value: null,
-            weight: null
+            weight: null,
+            style: null
         }
     },
     componentDidMount: function(){
-        this.setState({name: this.props.name, value: this.props.value, weight: this.props.weight }, function(){
+        this.setState({ name: this.props.name, value: this.props.value, weight: this.props.weight }, function(){
         this.props.onChange(this.props.id, this.state.name, this.state.value, this.state.weight)});
     },
     handleChangeName: function(e) {
@@ -18,13 +19,29 @@ const Item = React.createClass({
         this.props.onChange(this.props.id, this.state.name, this.state.value, this.state.weight)});
     },
     handleChangeValue: function(e) {
-        const newValue = e.target.value;
-        this.setState({value: newValue}, function(){
+        // Proof out negative values and those over maximum
+        let val = Number(e.target.value);
+        const min = Number(e.target.min);
+        const max = Number(e.target.max);
+        if(val > max){
+            e.target.value = max;
+        }else if(val < val){
+            val = val;
+        }
+        this.setState({value: e.target.value}, function(){
         this.props.onChange(this.props.id, this.state.name, this.state.value, this.state.weight)});
     },
     handleChangeWeight: function(e) {
-        const newWeight = e.target.value;
-        this.setState({weight: newWeight}, function(){
+        // Proof out negative values and those over maximum
+        let val = Number(e.target.value);
+        const min = Number(e.target.min);
+        const max = Number(e.target.max);
+        if(val > max){
+            e.target.value = max;
+        }else if(val < val){
+            val = val;
+        }
+        this.setState({weight: e.target.value}, function(){
         this.props.onChange(this.props.id, this.state.name, this.state.value, this.state.weight)});
     },
     getFocus: function(e){
@@ -42,19 +59,26 @@ const Item = React.createClass({
         this.props.removeMe(this.props.id);
     },
 	render: function() {
+        let style = {};
+        if(this.props.chosen){
+            style = {
+                color: 'rgba(80,220,100,1)',
+                borderColor: 'rgba(80,220,100,1)'
+            }
+        }
 		return(
 			<div className="item">
 				<div className="field">
 					<h5 className="label">Item</h5>
-					<input type="text" defaultValue={this.props.name} onFocus={this.getFocus} onBlur={this.nameLoseFocus} onChange={this.handleChangeName}/>
+					<input style={style} type="text" defaultValue={this.props.name} onFocus={this.getFocus} onBlur={this.nameLoseFocus} onChange={this.handleChangeName}/>
 				</div>
 				<div className="field">
 					<h5 className="label">Value</h5>
-					<input type="number" min="0" defaultValue={this.props.value} onChange={this.handleChangeValue}/>
+					<input style={style} type="number" min="0" max="999" defaultValue={this.props.value} onChange={this.handleChangeValue}/>
 				</div>
 				<div className="field">
 					<h5 className="label">Weight</h5>
-					<input type="number" min="0" defaultValue={this.props.weight} onChange={this.handleChangeWeight}/>
+					<input style={style} type="number" min="0" max="999" defaultValue={this.props.weight} onChange={this.handleChangeWeight}/>
 				</div>
 				<div className="removeMe" onClick={this.callRemoveMe}>x</div>
 			</div>

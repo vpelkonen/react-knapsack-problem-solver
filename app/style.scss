@@ -94,68 +94,164 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-$gray: rgba(180,190,195,1);
-$white: rgba(250,250,250,1);
+//$gray: rgba(180,190,195,1);
+$gray: rgba(48,50,52,1); 
+$white: rgba(450,240,240,1);
 $shadow: rgba(30,30,30,0.9);
-$highlight: rgba(30,140,190,1); // blue
+$highlight: rgba(20,130,170,1); // blue
 $negative: rgba(200,90,100,1); // red
 $textGray: rgba(150,150,150,1);
 
 html{
     font-size: 16px;
+    color:$white;
+    font-family: 'Open Sans', sans-serif;
 }
+/* Background pattern from subtlepatterns.com */
 body{
     background-color: $gray;
     main{
-        max-width:500px;
-        padding:20px 32px;
-        margin:20px auto 0 auto;
-        box-shadow: 1px 1px 3px $shadow;
-        background-color:$white;
-    }
-    h1{
-        color:$highlight;
-    }
-    h5{
-        margin:0;
-        color:$textGray;
-    }
-    button{
-        padding:10px 20px;
-        margin: 10px 5px 0 0;
-        border:none;
-        color:$white;
-        border:1px solid $highlight;
-        background-color:$highlight;
-        transition:200ms all;
-        &:hover{
-            background-color:$white;
+        position: relative;
+        max-width:960px;
+        padding:15px 20px;
+        margin:15px auto 0 auto;
+        .zipper{
+            position: absolute;
+            right:0;
+            top:0;
+            opacity:.2;   
+        }
+        @media screen and (max-width: 767px){ .zipper{ display: none; } }
+        p{
+            position: relative;
+            max-width:650px;
+            color:$white;
+        }
+        @media screen and (min-width: 1040px){
+            p::before{  
+                content:'"';
+                position: absolute;
+                left:-2rem;
+                top:-1.5rem;
+                font-size:3.5rem;
+            }   
+        }
+        .wikiLink{
             color:$highlight;
+            font-style: italic;
+            font-size:1.3rem;
+            margin-left:2rem;
         }
-    }
-    .item{
-        .field{
-            display: inline-block;
-            margin: 0 10px 10px 0;
-
-            input[type="number"]{
-                width:4rem;
-            }
+        h1{
+            font-family: 'Droid Serif', serif;
+            line-height: 1.25;
+            color:$highlight;
+            font-size:3rem;
+            text-shadow: 2px 2px 8px $shadow;
         }
-        .removeMe{
+        h5{
+            font-family: 'Droid Serif', serif;  
+            margin:0;
+            color:$textGray;
+        }
+        button{
             display: inline-block;
-            color:$negative;
-            text-align: center;
-            cursor: pointer;
+            padding:10px 20px;
+            margin: 10px 5px 0 0;
+            border:none;
+            color:$white;
+            border:1px solid $highlight;
+            background-color:$highlight;
             transition:200ms all;
             &:hover{
-                transform:scale(2);
+                background-color:$white;
+                color:$highlight;
             }
         }
-    }
-    .item:not(:first-of-type){
-        .label{
-            display: none;
+        form{
+            margin-top:3rem;
+            max-width:360px;
+        }
+        .result{
+            height:20px;
+            width:18.3rem;
+            margin-bottom:20px;
+        }
+        .item, .result, .limiter{
+            .field{
+                display: inline-block;
+                margin: 0 10px 10px 0;
+                input{
+                    background:none;
+                    border:none;
+                    border-bottom:1px solid $white;
+                    width:9rem;
+                }
+                input[type="number"]{
+                    width:4rem;
+                }
+            }
+            .totalValue, .totalWeight{
+                display: inline-block;
+                float:right;
+                margin:0 0 0 10px;
+                font-weight:700;
+                input{
+                    background:none;
+                    border:none;
+                    border-bottom:1px solid $textGray;
+                    color:$highlight;
+                }
+                input[type="number"]{
+                    width:4rem;
+                }
+            }
+            .resultTitle{
+                float:right;
+                margin-top:2px;
+                margin-bottom:0;
+                color:$textGray;
+            }
+            .removeMe{
+                position: relative;
+                display: inline-block;
+                color:$negative;
+                text-align: center;
+                cursor: pointer;
+                transition:200ms all;
+                &:hover{
+                    transform:scale(2);
+                }
+                @media screen and (min-width: 767px){
+                    &:hover::after{
+                        content:' remove';
+                        position: absolute;
+                        font-size:0.5rem;
+                        left:1rem;
+                    }   
+                }
+            }
+        }
+        .limiter{
+            h5{
+                display: inline-block;
+                margin-left: 8.4rem;
+            }
+            input{
+                margin-left: 10px;
+                display: inline-block;
+                border-bottom:1px solid $textGray;
+            }
+        }
+        .item{
+            .label{
+                display: none;
+            }   
+        }
+        .item:nth-of-type(2){
+            .label{
+                display: block;
+            }
         }
     }
 }

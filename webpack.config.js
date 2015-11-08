@@ -16,6 +16,7 @@ config = {
 		loaders: [
 			{ test: /[\\\/]bower_components[\\\/]modernizr[\\\/]modernizr\.js$/,
             loader: "imports?this=>window!exports?window.Modernizr" },
+            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
             { test: /\.scss$/, loader: 'style!css!sass' },
     		{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
 		]

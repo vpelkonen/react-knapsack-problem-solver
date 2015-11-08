@@ -8,25 +8,14 @@ import KnapsackForm from './components/KnapsackForm';
 
 // Create wrapper for the whole bunch
 const App = React.createClass({
-	/*getInitialState: function(){
-		let fields = [uuid(),uuid(),uuid()];
-		return{
-			fields: fields
-		}
-	},
-	addField: function(){
-		let newFields = this.state.fields;
-		newFields.push(uuid());
-		this.setState(newFields);
-	},*/
 	render: function(){
-		//let fields = this.state.fields;
 		return(
 		    <main>
 		    	<h1>So, you have a Knapsack Problem...</h1>
-				{/*<KnapsackForm fields={fields}/>*/}
+		    	<p className="quote">The knapsack problem or rucksack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.</p>
+		    	<a className="wikiLink" href="https://en.wikipedia.org/wiki/Knapsack_problem">- Wikipedia</a>
 				<KnapsackForm/>
-
+		    	<img src="zipper.png" alt="" className="zipper"/>
 		    </main>
 		);
 	}
